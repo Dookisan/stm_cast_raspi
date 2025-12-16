@@ -1,0 +1,20 @@
+[project]
+name = "cast-rasp-deploy"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.121.3",
+    "keras>=3.12.0",
+    "matplotlib>=3.10.7",
+    "numpy>=2.3.5",
+    "pandas>=2.3.3",
+    "scikit-learn>=1.7.2",
+    "seaborn>=0.13.2",
+    "smbus>=1.1.post2",
+    "smbus2>=0.5.0",
+    "solara>=1.54.0",
+    "tensorflow>=2.20.0",
+    "uvicorn>=0.38.0",
+]
