@@ -196,14 +196,8 @@ class controller(object):
                 # 2. NN konfigurieren (nur einmal bei erstem Modell)
                 if idx == 1:
                     self.generate_nn_config()
-                
-                # 3. Train/Test Split
                 self.split_matricies()
-                
-                # 4. Random Search
                 self.random_param_search()
-                
-                # 5. Analyse
                 self.analyze_model_results(top_n=3)
                 
                 # 6. Modell speichern mit Suffix
