@@ -30,7 +30,15 @@ class PipelineBuilder(object):
     @staticmethod
     def multi_mododel_training_pipeline(controller):
         """creates all nn for a 24h forecast"""
-        
+        pipeline = Pipeline("multi_model_training", controller)
+        (pipeline.add_step("init_data_processor", filepath_station="data/Weatherstation_STMCAST_Data_202511102036.csv",
+                        filepath_weather="data/Weather_API_Data_202511102036.csv")
+        .add_step("load_data")
+        .add_step("preprocess_data")
+        .add_step("init_neuronal_network")
+        .add_step("train_multiple_models", range(1, 25, 1))
+        )
+        return pipeline
 
     @staticmethod
     def single_model_pipeline(controller):
@@ -71,7 +79,10 @@ class PipelineBuilder(object):
         """fetches mongoose data and returns it to i2c"""
 
         pipeline = Pipeline("mongoose_i2c", controller)
-        (pipeline.add_step("init_i2c")
+
+        (pipeline.add_step("init_data_processor", filepath_station="data/Weatherstation_STMCAST_Data_202511102036.csv",
+                        filepath_weather="data/Weather_API_Data_202511102036.csv")
+         .add_step("init_i2c")
         .add_step("init_client")
         .add_step("check_can_interrupt")
         .add_step("fetch_mongoose_data")
@@ -86,9 +97,11 @@ class PipelineBuilder(object):
         
         pipeline = Pipeline("simulation", controller)
         (pipeline.add_step("init_i2c")
-        .add_step("init_client")
-        .add_step("check_can_interrupt")
-        .add_step("get_day_error_sequence", day = 18)
-        .add_step("write_i2c_array")
+        .add_step("init_data_processor", filepath_station="data/Weatherstation_STMCAST_Data_202511102036.csv",
+                        filepath_weather="data/Weather_API_Data_202511102036.csv")
+        .add_step("load_data")
+        .add_step("preprocess_data")
+        .add_step("example_db_series")
+        .add_step("simulate_i2c_write_array")
         )
         return pipeline

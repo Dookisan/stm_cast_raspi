@@ -3,6 +3,7 @@ from src import controller
 import smbus2
 import time
 import numpy as np
+import struct
 
 """
 I2C Communication module for STM32 telemetry data exchange.
@@ -16,8 +17,10 @@ class i2c_com(object):
     def write_byte(self, data):
         """Schreibt 1 Byte an Register 0x0 (konvertiert NumPy-Typen automatisch)"""
         # Konvertiere zu normalem Python int (falls NumPy-Typ)
-        byte_value = int(data) & 0xFF  # Begrenze auf 0-255
-        self.i2c_bus.write_byte_data(self.i2c_addr, 0x0, byte_value)
+
+        for byte in data:
+            byte_value = int(byte) & 0xFF  # Begrenze auf 0-255
+            self.i2c_bus.write_byte_data(self.i2c_addr, 0x0, byte_value)
 
     def read_byte(self, num_bytes=24):
         while(1):
@@ -33,11 +36,12 @@ class i2c_com(object):
 
     def writeArray(self, data_array):
         """Schreibt ein Array zum I2C-Gerät"""
-        from smbus2 import i2c_msg
-        
+    
         # Array direkt senden
-        write = i2c_msg.write(self.i2c_addr, data_array)
-        self.i2c_bus.i2c_rdwr(write)
+        byte_array =  struct.pack('<3f', *data_array)
+
+        write = self.i2c_bus.write_i2c_block_data(self.i2c_addr,0,byte_array)
+        
     
     def readArray(self, num_bytes=8):
         """Liest ein Array mit mehreren Bytes vom I2C-Gerät"""

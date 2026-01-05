@@ -76,6 +76,9 @@ def NeuralNetworkPage():
         finally:
             is_training.value = False
 
+    def upload_neural_networks():
+        pass  # Placeholder for upload functionality
+
     # Model Initialization
     with solara.Card("🔧 Model Initialization", elevation=2):
         if not ctrl.neural_network_model:
@@ -175,7 +178,7 @@ def NeuralNetworkPage():
         else:
             solara.Warning("⚠️ Neural Network Model not initialized. Initialize in controller first.")
 
-    # Training (einfach)
+    # Training 
     with solara.Card("🏋️ Training", elevation=2):
         if not ctrl.neural_network_model:
             solara.Info("Initialize Neural Network first")
@@ -219,4 +222,19 @@ def NeuralNetworkPage():
                         """)
                     else:
                         solara.Warning("⚠️ No successful results")
+
+    with solara.Card("🏋️ Upload to STM", elevation=2):
+        if not ctrl.neural_network_model:
+            solara.Info("Initialize Neural Network first")
+        elif not nn_input_loaded.value:
+            solara.Info("Load Input Layer first")
+        else:
+            # Training controls
+            solara.Button(
+                "▶️ Upload Neural Networks",
+                color="success",
+                block=True,
+                on_click=upload_neural_networks,
+                disabled=is_training.value or training_complete.value
+            )
 

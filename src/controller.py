@@ -6,6 +6,7 @@ from src.linear_corrector import FIRMultiStepPredictor
 from utils.i2c import i2c_com
 from api.requests import client
 
+
 '''
 Controller module for handling user requests and responses.
 
@@ -21,6 +22,7 @@ class controller(object):
         self.fir_filter = None
         self.can_interrupt = False
         self.mongoose_data = None
+        self.simulation = False
 
     def current_status(self):
         '''
@@ -107,7 +109,13 @@ class controller(object):
         self.data_processor.create_corrector_training_maticies(bias_value = 1,lag=9,prediction_horizon = 24)
 
     def example_db_series(self):
-        self.data_processor.example_db_series(self.client_api.mongoose_data)
+        self.data_processor.example_db_series()
+    
+
+        self.simulation = True
+        self.mongoose_data = self.data_processor.ex
+
+
     #---------Plotter Methods---------#
 
     def init_plotter(self):
@@ -283,34 +291,44 @@ class controller(object):
             try:
                 print(f"ich bin da")
                 incoming = self.i2c_com.readArray()
+
                 if 2 in  incoming:
                     print("⚠️ CAN Interrupt detected from STM32.")
                     self.can_interrupt = True
                     break
+
             except Exception as e:
                 print(f"Fehler beim Lesen des I2C-Arrays: {e}")
             
-    def write_i2c_array(self,data):
+    def write_i2c_array(self):
         if not self.i2c_com:
             raise Exception("I2C communication not initialized. Call init_i2c first.")
-        elif not self.can_interrupt:
-            raise Exception("No CAN interrupt detected. Cannot write data to I2C device.")  
+        
         #self.data_processor.resize_to_can_frame(self.data_processor.prediction)
 
         try:
-            self.i2c_com.writeArray(data)
+            self.i2c_com.writeArray(self.mongoose_data)
             print("✅ Data array written to I2C device.")
         except Exception as e:
             print(f"Fehler beim Schreiben des I2C-Arrays: {e}")
 
-    
+    def simulate_i2c_write_array(self):
+        try:
+            for i in range(len(self.mongoose_data)):
+                single_seq = self.mongoose_data.iloc[i].values
+
+                self.i2c_com.writeArray(single_seq)
+
+        except Exception as e:
+            print(f"Fehler beim Schreiben des I2C-Arrays: {e}")
+
     def write_i2c_byte(self):
         import time
 
         if not self.i2c_com:
             raise Exception("I2C communication not initialized. Call init_i2c first.")
 
-        incoming = self.i2c_com.write_byte(self.mongoose_data.astype(int))
+        incoming = self.i2c_com.write_byte_data(self.mongoose_data.astype(int))
         #incoming = self.i2c_com.generateTelematry(self.data_processor.ex["weatherstation_temp"][0].astype(int))
         print(f"data i2c byte: {incoming}")
     """

@@ -8,5 +8,8 @@ class client():
 
     def get_data_mongoose(self):
         response = requests.get(self.reques_mongoose)
-        df = pd.read_json(self.reques_mongoose,lines = True)
+        df = pd.read_json(response.text, lines=True)
         self.mongoose_data = df
+        
+
+    

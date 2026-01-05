@@ -214,19 +214,48 @@ class DataProcessor(object):
         self.E = np.array(E)
         self.E_hat = np.array(E_hat)
 
-  def example_db_series(self,mongoose_data):
-      err = mongoose_data["weatherstation_temp"] - mongoose_data["temperature"]
-      mongoose_data = mongoose_data.assign(error=err)
-      self.ex = mongoose_data
+  def example_db_series(self):
+    result = pd.merge_asof(
+       self.weather_stm,
+       self.weather_api,
+    on='observation_time',
+    direction='nearest',
+    tolerance=pd.Timedelta(minutes=20),
+    suffixes=('_stm', '_api')
+    )
+    result = result.drop("observation_time",axis=1)
 
+    # Create the error frame for temp, pres, humidity
+    error_temp = result['temperature_stm'] - result['temperature_api'] 
+    error_pres = result['pressure_stm'] - result['pressure_api']
+    error_hum = result['humidity_stm'] - result['humidity_api']
 
+  
+    self.ex = pd.DataFrame({
+  
+        'error_temp': error_temp,
+        'error_pres': error_pres,
+        'error_hum': error_hum
+    })
+    self.ex = self.ex.iloc[0:24].fillna(method='ffill')
+    print(f"✅ Example DB series created successfully.")
 
-  def resize_to_can_frame(self,prediction):
-    self.databyte =  np.array(prediction,dtype=np.uint8)
       
   
   def build_temp(self,mongoose_data):
       temp = mongoose_data.fillna(0)
-      value = temp.values
+      mask = ["observation_time" ,"temperature" , "pressure" , "humidity" , "weatherstation_temp" , "weatherstation_press" ,"weatherstation_hum"]
+      temp = temp.loc[0,mask]
+
+      error_temp = temp["weatherstation_temp"] - temp["temperature"]
+      error_pres = temp["weatherstation_press"] - temp["pressure"]
+      error_hum = temp["weatherstation_hum"] - temp["humidity"]
+
+      mongoose = pd.DataFrame({
+          'error_temp': [error_temp],
+          'error_pres': [error_pres],
+          'error_hum': [error_hum]
+      })
+      value = mongoose.iloc[0].values
       return value
      

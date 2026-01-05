@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 from datetime import datetime
 import matplotlib.pyplot as plt
+import os
 
 # TensorFlow/Keras Imports
 import tensorflow as tf
@@ -204,6 +205,9 @@ class NeuronalNetworkModel(object):
         print(f"\n💾 SPEICHERE MODEL RESULTS{suffix}")
         print("="*40)
         print(f"🏆 Trainiere finales Modell mit bester Config...")
+
+        # Erstelle models Ordner falls nicht vorhanden
+        os.makedirs('models', exist_ok=True)
 
         # Baue Modell mit bester Config
         model = tf.keras.Sequential()

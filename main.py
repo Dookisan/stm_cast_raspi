@@ -16,9 +16,17 @@ def main():
     nn = the_builder.single_model_pipeline(controller()) # no automatic save
     nn.run()
     
-    """
     simulation = the_builder.simulation_pipeline(controller())
     simulation.run()
+    
+    while True:
+     # === MONGOOSE COMMUNICATION PIPELINE ===      
+        server = the_builder.mongoose_pipeline(controller())
+        server.run()
+        
+    """
+    
+    
 
      # === MULTI-MODEL TRAINING ===
     # Option 1: Einzelnes Modell
@@ -35,7 +43,8 @@ def main():
 
     # === CONTINUES RUN  === 
 
-
+    nn_training_pipeline = the_builder.multi_mododel_training_pipeline(controller())
+    nn_training_pipeline.run()
 
     
     print("\n🎯 Fertig! Alle Modelle sind im 'models/' Ordner gespeichert.")
