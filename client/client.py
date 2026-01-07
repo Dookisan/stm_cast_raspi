@@ -1,8 +1,11 @@
 import logging
-from utils.logging_config import setup_logging
-from discovery import discover_server, heartbeat
-from utils.test_suite import TestSuite
+from client.utils.logging_config import setup_logging
+from client.discovery import discover_server, heartbeat
+from client.utils.test_suite import TestSuite
+from client.api_requests import Requests
 import sys
+import requests
+import pandas as pd
 
 # Configure logging
 setup_logging(
@@ -20,7 +23,23 @@ class Client(object):
     def __init__(self):
         self.Server_URL = discover_server()
         heartbeat(self.Server_URL)
-    #client methods
+        self.requests = Requests(self.Server_URL)
+
+        self.reques_mongoose = "http://10.0.0.42/json_data" 
+        self.mongoose_data = None
+
+    def upload_neural_networks(self, choices):
+        """Uploads neural networks to the server"""
+        self.requests.upload_nn_models(choices)
+
+    def generate_code(self, target: str, name: str):
+        """Generates code for the uploaded models"""
+        self.requests.generate_code(target, name)
+    
+    def get_data_mongoose(self):
+        response = requests.get(self.reques_mongoose)
+        df = pd.read_json(response.text, lines=True)
+        self.mongoose_data = df
 
 
 # testfunction for development
@@ -32,7 +51,8 @@ def main():
         pass
 
     REQUESTS = Requests(CLIENT.Server_URL)
-    REQUESTS.upload_nn_models()
+    REQUESTS.upload_nn_models(range(1, 24, 1))
+    REQUESTS.generate_code(target="stm32f4", name="my_model")
 
     
 if __name__ == '__main__': 

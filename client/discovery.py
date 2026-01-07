@@ -4,7 +4,7 @@ import json
 import time
 import logging
 
-from utils.config import DISCOVERY_RETRIES, DISCOVERY_TIMEOUT,SERVICE_NAME
+from client.utils.config import DISCOVERY_RETRIES, DISCOVERY_TIMEOUT,SERVICE_NAME
 
 # Standard Python pattern
 logger = logging.getLogger(__name__)

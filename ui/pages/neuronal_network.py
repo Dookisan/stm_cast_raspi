@@ -38,9 +38,14 @@ def NeuralNetworkPage():
     def load_input_layer():
         is_loading_input.value = True
         try:
-            ctrl.get_nn_input_layer(input_layer_choice.value)
+            if mode.value == "single":
+                input_layer_choice.value = single_value.value
+                ctrl.get_nn_input_layer(input_layer_choice.value)
+                print(f"✅ NN Input Layer loaded with choice={input_layer_choice.value}")
+            else:  # range
+                ctrl.train_multiple_models(range(range_value.value[0], range_value.value[1] + 1))
+                print(f"✅ Multiple models trained for range {range_value.value[0]}-{range_value.value[1]}")
             nn_input_loaded.value = True
-            print(f"✅ NN Input Layer loaded with choice={input_layer_choice.value}")
         except Exception as e:
             print(f"❌ Error loading NN input layer: {e}")
         finally:
@@ -77,7 +82,17 @@ def NeuralNetworkPage():
             is_training.value = False
 
     def upload_neural_networks():
-        pass  # Placeholder for upload functionality
+        ctrl.init_client()
+        if mode.value == "single":
+                input_layer_choice.value = single_value.value
+                ctrl.upload_nn_models(input_layer_choice.value)
+                ctrl.generate_code(target="stm32f4", name="my_model")
+                print(f"✅ NN model uploaded and code generated for choice={input_layer_choice.value}")
+
+        else:  # range  
+                ctrl.upload_nn_models(range(range_value.value[0], range_value.value[1] + 1))
+                ctrl.generate_code(target="stm32f4", name="my_model")
+                print(f"✅ Multiple models uploaded and code generated for range {range_value.value[0]}-{range_value.value[1]}")
 
     # Model Initialization
     with solara.Card("🔧 Model Initialization", elevation=2):
@@ -107,13 +122,58 @@ def NeuralNetworkPage():
             - Hour 9: Used as target
             """)
 
-            solara.SliderInt(
-                label=f"Hour Choice: {input_layer_choice.value}",
-                value=input_layer_choice,
-                min=0,
-                max=9,
-                step=1
-            )
+            with solara.Row():
+                solara.Markdown("### Selection Mode")
+
+                num_models = 23  # Total models available
+    
+                # State
+                mode = solara.use_reactive("single")  # "single" or "range"
+                single_value = solara.use_reactive(1)
+                range_value = solara.use_reactive([1, 5])
+
+                solara.Button(
+                    "Single Model",
+                    color="primary" if mode.value == "single" else "default",
+                    on_click=lambda: mode.set("single")
+                )
+                solara.Button(
+                    "Model Range",
+                    color="primary" if mode.value == "range" else "default",
+                    on_click=lambda: mode.set("range")
+                )
+
+            # Slider based on mode
+            if mode.value == "single":
+                solara.Markdown("### Select a Model")
+                
+                solara. SliderInt(
+                    label=f"Model {single_value.value}",
+                    value=single_value,
+                    min=1,
+                    max=num_models,
+                    step=1
+                )
+                
+                solara.Info(f"Selected: **model_{single_value.value}. tflite**")
+                
+            else:  # range
+                solara.Markdown("### Select Model Range")
+                
+                solara.SliderRangeInt(
+                    label=f"Models {range_value. value[0]} - {range_value.value[1]}",
+                    value=range_value,
+                    min=1,
+                    max=num_models,
+                    step=1
+                )
+                
+                min_model, max_model = range_value. value
+                num_selected = max_model - min_model + 1
+                
+                solara.Success(f"Selected **{num_selected}** models:")
+                for i in range(min_model, max_model + 1):
+                    solara. Markdown(f"- model_{i}.tflite")
 
             solara.Button(
                 "🔧 Load Input Layer",

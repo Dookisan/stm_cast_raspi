@@ -1,0 +1,68 @@
+11:16:25 - ERROR    - Traceback (most recent call last):
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/starlette/routing.py", line 694, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/starlette/routing.py", line 571, in __aenter__
+    await self._router.startup()
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/starlette/routing.py", line 673, in startup
+    handler()
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/solara/server/starlette.py", line 620, in on_startup
+    appmod.ensure_apps_initialized()
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/solara/util.py", line 345, in wrapper
+    return_value = f()
+                   ^^^
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/solara/server/app.py", line 542, in ensure_apps_initialized
+    app.init()
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/solara/server/app.py", line 106, in init
+    app = self._execute()
+          ^^^^^^^^^^^^^^^
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/solara/server/app.py", line 153, in _execute
+    routes = [solara.autorouting._generate_route_path(self.path, first=True, initial_namespace=initial_namespace)]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/solara/autorouting.py", line 525, in _generate_route_path
+    module = source_to_module(subpath, initial_namespace=initial_namespace)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/solara/autorouting.py", line 39, in source_to_module
+    exec(ast, mod.__dict__)
+  File "/home/elias/Documents/stm_cast_raspi/sol.py", line 9, in <module>
+    from ui.pages.neuronal_network import NeuralNetworkPage
+  File "/home/elias/Documents/stm_cast_raspi/ui/pages/neuronal_network.py", line 93
+    else:  # range
+                  ^
+IndentationError: unindent does not match any outer indentation level
+
+11:16:25 - ERROR    - Application startup failed. Exiting.
+11:19:43 - WARNING  - 5 out of the last 5 calls to <function TensorFlowTrainer.make_predict_function.<locals>.one_step_on_data_distributed at 0x7ffebc31a840> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+11:19:48 - WARNING  - 6 out of the last 6 calls to <function TensorFlowTrainer.make_predict_function.<locals>.one_step_on_data_distributed at 0x7ffebc74b380> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+11:22:16 - INFO     - Function `function` contains input name(s) resource with unsupported characters which will be renamed to sequential_30_1_dense_76_1_add_readvariableop_resource in the SavedModel.
+11:22:16 - INFO     - Function `function` contains input name(s) resource with unsupported characters which will be renamed to sequential_30_1_dense_76_1_add_readvariableop_resource in the SavedModel.
+11:22:16 - INFO     - Assets written to: /tmp/tmp_k4si3es/assets
+11:24:24 - INFO     - Assets written to: /tmp/tmpb5bi7ukt/assets
+11:27:29 - INFO     - Assets written to: /tmp/tmpje2mxpag/assets
+11:31:27 - INFO     - Assets written to: /tmp/tmpsei8mthz/assets
+11:41:34 - INFO     - 🔍 Discovery attempt 1/3
+11:41:54 - INFO     - ✅ Discovered server at http://192.168.178.43:5000 (via port 5003)
+11:41:54 - INFO     - 
+🔍 Checking server health...
+11:41:54 - INFO     - ✅ Server is healthy!
+11:41:54 - INFO     - Uploading neural network models to the server...
+11:41:54 - INFO     - Uploading model for choice 1...
+11:45:03 - INFO     - 🔍 Discovery attempt 1/3
+11:45:24 - INFO     - ✅ Discovered server at http://192.168.178.43:5000 (via port 5003)
+11:45:24 - INFO     - 
+🔍 Checking server health...
+11:45:24 - INFO     - ✅ Server is healthy!
+11:45:24 - INFO     - Uploading neural network models to the server...
+11:45:24 - INFO     - Uploading model for choice 1...
+11:48:48 - INFO     - 🔍 Discovery attempt 1/3
+11:49:08 - INFO     - ✅ Discovered server at http://192.168.178.43:5000 (via port 5003)
+11:49:08 - INFO     - 
+🔍 Checking server health...
+11:49:08 - INFO     - ✅ Server is healthy!
+11:49:08 - INFO     - Uploading neural network models to the server...
+11:49:08 - INFO     - Uploading model for choice 1...
+11:49:08 - INFO     - ✅ PASSED
+11:49:08 - INFO     - Generating code for the uploaded model...
+11:49:08 - INFO     - Generating code for model choice 1...
+11:49:16 - INFO     - Generated code: ['err_seq_1']
+11:49:16 - INFO     - ✅ PASSED

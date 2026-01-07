@@ -5,6 +5,7 @@ from src.deep_learning import NeuronalNetworkModel
 from src.linear_corrector import FIRMultiStepPredictor
 from utils.i2c import i2c_com
 from api.requests import client
+from client.client import Client
 
 
 '''
@@ -343,7 +344,7 @@ class controller(object):
       """
     #---------Client Methods---------#
     def init_client(self):
-        self.client_api = client()
+        self.client_api = Client()
         print("✅ Client initialized.")
 
     def fetch_mongoose_data(self):
@@ -362,6 +363,14 @@ class controller(object):
             raise Exception("Client not initialized. Call init_client first.")
         self.mongoose_data = self.data_processor.build_temp(self.client_api.mongoose_data)
         print("✅ Mongoose data preprocessed.")
+
+    def upload_nn_models(self, choices):
+        """Uploads neural networks to the server"""
+        self.client_api.upload_neural_networks(choices)
+
+    def generate_code(self, target="stm32f4", name="my_model"):
+        """Generates code for the uploaded models"""
+        self.client_api.generate_code(target, name)
     '''
     how i activatet them prevoisly
 
