@@ -11,6 +11,7 @@ class Requests:
         self.files = None
         self.generated = []
         self.choice = None
+        self.type = None  # to be set externally
 
     def upload_nn_models(self, choices):
         """Upload neural networks to the server"""
@@ -29,7 +30,7 @@ class Requests:
         for choice in choice_list:
             logger.info(f"Uploading model for choice {choice}...")
 
-            model = f"models/best_model_{choice}.tflite"
+            model = f"models/{self.type}_{choice}.tflite"
 
             with open(model, 'rb') as f:
                 files = {'file': f}
@@ -52,11 +53,10 @@ class Requests:
         for choice in self.choice:
             logger.info(f"Generating code for model choice {choice}...")
             payload = {
-                'filename': f"best_model_{choice}.tflite",
+                'filename': f"{self.type}_{choice}.tflite",
                 'target':  target,
                 'name': name
             }
-    
             logger.debug(f"Payload: {payload}")
     
             response = requests.post(f"{self.SERVER_URL}/generate", json=payload)
@@ -89,3 +89,7 @@ class Requests:
     
         logger.info("✅ PASSED")
         self.files = result['files'][0]
+
+    def set_type(self, type: str):
+        self.type = type
+        logger.info(f"Set model type to {self.type}")

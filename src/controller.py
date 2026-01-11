@@ -85,10 +85,10 @@ class controller(object):
             raise Exception("DataProcessor not initialized. Call init_data_processor first.")
         self.data_processor._load_data()
 
-    def preprocess_data(self):
+    def preprocess_data(self,data_type:str):
         if not self.data_processor:
             raise Exception("DataProcessor not initialized. Call init_data_processor first.")
-        self.data_processor.preprocess_data()
+        self.data_processor.preprocess_data(data_type)
 
     def get_day_error_sequence(self,day:int):
         if not self.data_processor:
@@ -157,8 +157,8 @@ class controller(object):
         self.neural_network_model.analyze_results()
         self.neural_network_model.show_top_configs(top_n=5)
 
-    def save_NN_model(self, model_suffix=""):
-        return self.neural_network_model.save_model(model_suffix=model_suffix)
+    def save_NN_model(self,model_suffix=""):
+        return self.neural_network_model.save_model(self.data_processor.data_type,model_suffix=model_suffix)
     
     def train_multiple_models(self, choices):
         """
@@ -343,7 +343,7 @@ class controller(object):
         print("✅ Data array written to I2C device.")
       """
     #---------Client Methods---------#
-    def init_client(self):
+    def init_client(self):                 #TODO: Lool at the mongoose pipeline
         self.client_api = Client()
         print("✅ Client initialized.")
 
@@ -371,6 +371,13 @@ class controller(object):
     def generate_code(self, target="stm32f4", name="my_model"):
         """Generates code for the uploaded models"""
         self.client_api.generate_code(target, name)
+
+    def set_client_type(self, type: str):
+        """Sets the client model type (e.g., temperature, pressure, humidity)"""
+        if not self.client_api:
+            raise Exception("Client not initialized. Call init_client first.")
+        self.client_api.requests.set_type(type)
+        print(f"✅ Client model type set to '{type}'.")
     '''
     how i activatet them prevoisly
 

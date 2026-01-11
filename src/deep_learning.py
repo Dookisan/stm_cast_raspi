@@ -200,7 +200,7 @@ class NeuronalNetworkModel(object):
         print(f"✅ {len(self.search_results)} Tests durchgeführt")
         return len(self.search_results)
 
-    def save_model(self, model_suffix=""):
+    def save_model(self, model_prefix,model_suffix=""):
         suffix = f"_{model_suffix}" if model_suffix else ""
         print(f"\n💾 SPEICHERE MODEL RESULTS{suffix}")
         print("="*40)
@@ -223,7 +223,7 @@ class NeuronalNetworkModel(object):
                   validation_data=(self.X_test, self.y_test), verbose=0)
 
         # Speichere Modell im Keras 3 Format
-        h5_path = f'models/best_model{suffix}.keras'  # .keras statt .h5!
+        h5_path = f'models/{model_prefix}{suffix}.keras'  # .keras statt .h5!
         model.save(h5_path)
         print(f"✅ Modell gespeichert: {h5_path}")
 
@@ -235,7 +235,7 @@ class NeuronalNetworkModel(object):
         tflite_model = converter.convert()
 
         # Speichere TFLite Modell
-        tflite_path = f'models/best_model{suffix}.tflite'
+        tflite_path = f'models/{model_prefix}{suffix}.tflite'
         with open(tflite_path, 'wb') as f:
             f.write(tflite_model)
         print(f"✅ TFLite Modell gespeichert: {tflite_path}")

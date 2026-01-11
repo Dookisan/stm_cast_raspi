@@ -112,8 +112,9 @@ class PipelineBuilder(object):
 
         pipeline = Pipeline("updater", controller)
         (pipeline.add_step("init_client")
+        .add_step("set_client_type", type="temperature")    
         .add_step("upload_nn_models", range(1,24,1))
-        .add_step("generate_code", target="STM32", name="weather_forecast")
+        .add_step("generate_code", target="STM32", name="temperature")
         )
 
         

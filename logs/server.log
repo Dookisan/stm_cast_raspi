@@ -880,3 +880,329 @@ Traceback (most recent call last):
   File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/reacton/core.py", line 1746, in _render
     raise RuntimeError(
 RuntimeError: Previously render had 4 effects, this run 1 (in element/component: DataUploadPage()/react.component(ui.pages.data_upload.DataUploadPage)). Are you using conditional hooks?
+12:21:41 - WARNING  - 5 out of the last 5 calls to <function TensorFlowTrainer.make_predict_function.<locals>.one_step_on_data_distributed at 0x7ffedc455300> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+12:21:44 - WARNING  - 6 out of the last 6 calls to <function TensorFlowTrainer.make_predict_function.<locals>.one_step_on_data_distributed at 0x7ffedc5a7ec0> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+12:48:40 - WARNING  - 5 out of the last 5 calls to <function TensorFlowTrainer.make_predict_function.<locals>.one_step_on_data_distributed at 0x7ffe9c2fa020> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+12:48:46 - WARNING  - 6 out of the last 6 calls to <function TensorFlowTrainer.make_predict_function.<locals>.one_step_on_data_distributed at 0x7ffe9c691e40> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+12:54:59 - WARNING  - 5 out of the last 5 calls to <function TensorFlowTrainer.make_predict_function.<locals>.one_step_on_data_distributed at 0x7ffef455bec0> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+12:55:09 - WARNING  - 6 out of the last 6 calls to <function TensorFlowTrainer.make_predict_function.<locals>.one_step_on_data_distributed at 0x7fff0c3c2b60> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+12:58:10 - INFO     - Function `function` contains input name(s) resource with unsupported characters which will be renamed to sequential_30_1_dense_80_1_add_readvariableop_resource in the SavedModel.
+12:58:10 - INFO     - Function `function` contains input name(s) resource with unsupported characters which will be renamed to sequential_30_1_dense_80_1_add_readvariableop_resource in the SavedModel.
+12:58:10 - INFO     - Assets written to: /tmp/tmprkl1rlmo/assets
+13:00:25 - WARNING  - 5 out of the last 5 calls to <function TensorFlowTrainer.make_predict_function.<locals>.one_step_on_data_distributed at 0x7ffed44ba480> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+13:00:38 - WARNING  - 6 out of the last 6 calls to <function TensorFlowTrainer.make_predict_function.<locals>.one_step_on_data_distributed at 0x7ffeec5b4400> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+13:03:41 - INFO     - Function `function` contains input name(s) resource with unsupported characters which will be renamed to sequential_30_1_dense_75_1_add_readvariableop_resource in the SavedModel.
+13:03:41 - INFO     - Function `function` contains input name(s) resource with unsupported characters which will be renamed to sequential_30_1_dense_75_1_add_readvariableop_resource in the SavedModel.
+13:03:42 - INFO     - Assets written to: /tmp/tmp_7fafvni/assets
+13:20:46 - WARNING  - 5 out of the last 5 calls to <function TensorFlowTrainer.make_predict_function.<locals>.one_step_on_data_distributed at 0x7ffefc6e9c60> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+13:20:49 - WARNING  - 6 out of the last 6 calls to <function TensorFlowTrainer.make_predict_function.<locals>.one_step_on_data_distributed at 0x7fff2c1476a0> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+13:34:11 - ERROR    - error closing kernel on shutdown
+Traceback (most recent call last):
+  File "/home/elias/.local/share/uv/python/cpython-3.12.12-linux-aarch64-gnu/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/elias/.local/share/uv/python/cpython-3.12.12-linux-aarch64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/elias/.local/share/uv/python/cpython-3.12.12-linux-aarch64-gnu/lib/python3.12/asyncio/base_events.py", line 678, in run_until_complete
+    self.run_forever()
+  File "/home/elias/.local/share/uv/python/cpython-3.12.12-linux-aarch64-gnu/lib/python3.12/asyncio/base_events.py", line 645, in run_forever
+    self._run_once()
+  File "/home/elias/.local/share/uv/python/cpython-3.12.12-linux-aarch64-gnu/lib/python3.12/asyncio/base_events.py", line 1999, in _run_once
+    handle._run()
+  File "/home/elias/.local/share/uv/python/cpython-3.12.12-linux-aarch64-gnu/lib/python3.12/asyncio/events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/uvicorn/server.py", line 70, in serve
+    with self.capture_signals():
+         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/elias/.local/share/uv/python/cpython-3.12.12-linux-aarch64-gnu/lib/python3.12/contextlib.py", line 144, in __exit__
+    next(self.gen)
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/uvicorn/server.py", line 331, in capture_signals
+    signal.raise_signal(captured_signal)
+  File "/home/elias/.local/share/uv/python/cpython-3.12.12-linux-aarch64-gnu/lib/python3.12/asyncio/runners.py", line 157, in _on_sigint
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/starlette/routing.py", line 701, in lifespan
+    await receive()
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/uvicorn/lifespan/on.py", line 137, in receive
+    return await self.receive_queue.get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/elias/.local/share/uv/python/cpython-3.12.12-linux-aarch64-gnu/lib/python3.12/asyncio/queues.py", line 158, in get
+    await getter
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/solara/server/starlette.py", line 630, in on_shutdown
+    context.close()
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/solara/server/kernel_context.py", line 116, in close
+    with self, self.lock:
+               ^^^^^^^^^
+KeyboardInterrupt
+13:34:11 - ERROR    - Traceback (most recent call last):
+  File "/home/elias/.local/share/uv/python/cpython-3.12.12-linux-aarch64-gnu/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/elias/.local/share/uv/python/cpython-3.12.12-linux-aarch64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/elias/.local/share/uv/python/cpython-3.12.12-linux-aarch64-gnu/lib/python3.12/asyncio/base_events.py", line 678, in run_until_complete
+    self.run_forever()
+  File "/home/elias/.local/share/uv/python/cpython-3.12.12-linux-aarch64-gnu/lib/python3.12/asyncio/base_events.py", line 645, in run_forever
+    self._run_once()
+  File "/home/elias/.local/share/uv/python/cpython-3.12.12-linux-aarch64-gnu/lib/python3.12/asyncio/base_events.py", line 1999, in _run_once
+    handle._run()
+  File "/home/elias/.local/share/uv/python/cpython-3.12.12-linux-aarch64-gnu/lib/python3.12/asyncio/events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/uvicorn/server.py", line 70, in serve
+    with self.capture_signals():
+         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/elias/.local/share/uv/python/cpython-3.12.12-linux-aarch64-gnu/lib/python3.12/contextlib.py", line 144, in __exit__
+    next(self.gen)
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/uvicorn/server.py", line 331, in capture_signals
+    signal.raise_signal(captured_signal)
+  File "/home/elias/.local/share/uv/python/cpython-3.12.12-linux-aarch64-gnu/lib/python3.12/asyncio/runners.py", line 157, in _on_sigint
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/starlette/routing.py", line 701, in lifespan
+    await receive()
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/uvicorn/lifespan/on.py", line 137, in receive
+    return await self.receive_queue.get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/elias/.local/share/uv/python/cpython-3.12.12-linux-aarch64-gnu/lib/python3.12/asyncio/queues.py", line 158, in get
+    await getter
+asyncio.exceptions.CancelledError
+
+13:34:11 - ERROR    - Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/elias/.local/share/uv/python/cpython-3.12.12-linux-aarch64-gnu/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/elias/.local/share/uv/python/cpython-3.12.12-linux-aarch64-gnu/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/elias/.local/share/uv/python/cpython-3.12.12-linux-aarch64-gnu/lib/python3.12/asyncio/base_events.py", line 678, in run_until_complete
+    self.run_forever()
+  File "/home/elias/.local/share/uv/python/cpython-3.12.12-linux-aarch64-gnu/lib/python3.12/asyncio/base_events.py", line 645, in run_forever
+    self._run_once()
+  File "/home/elias/.local/share/uv/python/cpython-3.12.12-linux-aarch64-gnu/lib/python3.12/asyncio/base_events.py", line 1999, in _run_once
+    handle._run()
+  File "/home/elias/.local/share/uv/python/cpython-3.12.12-linux-aarch64-gnu/lib/python3.12/asyncio/events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/uvicorn/server.py", line 70, in serve
+    with self.capture_signals():
+         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/elias/.local/share/uv/python/cpython-3.12.12-linux-aarch64-gnu/lib/python3.12/contextlib.py", line 144, in __exit__
+    next(self.gen)
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/uvicorn/server.py", line 331, in capture_signals
+    signal.raise_signal(captured_signal)
+  File "/home/elias/.local/share/uv/python/cpython-3.12.12-linux-aarch64-gnu/lib/python3.12/asyncio/runners.py", line 157, in _on_sigint
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/uvicorn/protocols/websockets/websockets_impl.py", line 244, in run_asgi
+    result = await self.app(self.scope, self.asgi_receive, self.asgi_send)  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/starlette/applications.py", line 107, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 151, in __call__
+    await self.app(scope, receive, send)
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/starlette/middleware/gzip.py", line 19, in __call__
+    await self.app(scope, receive, send)
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/starlette/routing.py", line 364, in handle
+    await self.app(scope, receive, send)
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/starlette/routing.py", line 97, in app
+    await wrap_app_handling_exceptions(app, session)(scope, receive, send)
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/starlette/routing.py", line 95, in app
+    await func(session)
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/solara/server/starlette.py", line 293, in kernel_connection
+    await _kernel_connection(ws)
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/solara/server/starlette.py", line 366, in _kernel_connection
+    async with anyio.from_thread.BlockingPortal() as portal:
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/anyio/from_thread.py", line 199, in __aexit__
+    return await self._task_group.__aexit__(exc_type, exc_val, exc_tb)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 785, in __aexit__
+    raise exc_val
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/solara/server/starlette.py", line 369, in _kernel_connection
+    await thread_return
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/anyio/to_thread.py", line 56, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 2485, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+asyncio.exceptions.CancelledError
+13:36:23 - ERROR    - Error sending message: This portal is not running, closing websocket
+Traceback (most recent call last):
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/solara/server/kernel.py", line 217, in send_websockets
+    ws.send(binary_msg)
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/solara/server/websocket.py", line 26, in send
+    self.send_text(data)
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/solara/server/starlette.py", line 197, in send_text
+    self.portal.call(self._send_text_exc, data)
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/anyio/from_thread.py", line 321, in call
+    return cast(T_Retval, self.start_task_soon(func, *args).result())
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/anyio/from_thread.py", line 363, in start_task_soon
+    self._check_running()
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/anyio/from_thread.py", line 203, in _check_running
+    raise RuntimeError("This portal is not running")
+RuntimeError: This portal is not running
+13:36:23 - ERROR    - Error closing websocket: This portal is not running This portal is not running
+Traceback (most recent call last):
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/solara/server/kernel.py", line 217, in send_websockets
+    ws.send(binary_msg)
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/solara/server/websocket.py", line 26, in send
+    self.send_text(data)
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/solara/server/starlette.py", line 197, in send_text
+    self.portal.call(self._send_text_exc, data)
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/anyio/from_thread.py", line 321, in call
+    return cast(T_Retval, self.start_task_soon(func, *args).result())
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/anyio/from_thread.py", line 363, in start_task_soon
+    self._check_running()
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/anyio/from_thread.py", line 203, in _check_running
+    raise RuntimeError("This portal is not running")
+RuntimeError: This portal is not running
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/solara/server/kernel.py", line 229, in send_websockets
+    ws.close()
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/solara/server/starlette.py", line 174, in close
+    self.portal.call(_close_exc)
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/anyio/from_thread.py", line 321, in call
+    return cast(T_Retval, self.start_task_soon(func, *args).result())
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/anyio/from_thread.py", line 363, in start_task_soon
+    self._check_running()
+  File "/home/elias/Documents/stm_cast_raspi/.venv/lib/python3.12/site-packages/anyio/from_thread.py", line 203, in _check_running
+    raise RuntimeError("This portal is not running")
+RuntimeError: This portal is not running
+13:40:33 - WARNING  - 5 out of the last 5 calls to <function TensorFlowTrainer.make_predict_function.<locals>.one_step_on_data_distributed at 0x7ffee83dfe20> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+13:40:38 - WARNING  - 6 out of the last 6 calls to <function TensorFlowTrainer.make_predict_function.<locals>.one_step_on_data_distributed at 0x7fff0c2d6700> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+13:43:22 - INFO     - Function `function` contains input name(s) resource with unsupported characters which will be renamed to sequential_30_1_dense_75_1_add_readvariableop_resource in the SavedModel.
+13:43:22 - INFO     - Function `function` contains input name(s) resource with unsupported characters which will be renamed to sequential_30_1_dense_75_1_add_readvariableop_resource in the SavedModel.
+13:43:22 - INFO     - Assets written to: /tmp/tmpy96ufbi5/assets
+13:47:25 - INFO     - Assets written to: /tmp/tmpujwtvz0g/assets
+13:48:58 - INFO     - Assets written to: /tmp/tmp9i37uy0k/assets
+13:52:54 - INFO     - Assets written to: /tmp/tmpu0yfgoh2/assets
+13:56:07 - INFO     - Assets written to: /tmp/tmp86c_vvfz/assets
+13:58:08 - INFO     - Assets written to: /tmp/tmph2x5vzuk/assets
+14:01:52 - INFO     - Assets written to: /tmp/tmpeyu9tdd9/assets
+14:04:10 - INFO     - Assets written to: /tmp/tmpsftlx8bt/assets
+14:05:21 - INFO     - Assets written to: /tmp/tmpqc9pdaqv/assets
+14:06:58 - INFO     - Assets written to: /tmp/tmpkiv0nhq7/assets
+14:08:47 - INFO     - Assets written to: /tmp/tmpn1lcwsci/assets
+14:11:00 - INFO     - Assets written to: /tmp/tmpirj65c4n/assets
+14:13:37 - INFO     - Assets written to: /tmp/tmpdnzsrnxf/assets
+14:17:22 - INFO     - Assets written to: /tmp/tmpot5cogak/assets
+14:20:22 - INFO     - Assets written to: /tmp/tmpbt0lt4x0/assets
+14:22:35 - INFO     - Assets written to: /tmp/tmpsfdv0xt_/assets
+14:24:26 - INFO     - Assets written to: /tmp/tmp844du4wv/assets
+14:25:46 - INFO     - Assets written to: /tmp/tmp21btwjhv/assets
+14:26:12 - INFO     - Assets written to: /tmp/tmpvkqpyryn/assets
+14:29:12 - INFO     - Assets written to: /tmp/tmpf276mdt3/assets
+14:32:44 - INFO     - Assets written to: /tmp/tmp8rny_bpl/assets
+14:34:22 - INFO     - Assets written to: /tmp/tmpwb543qrk/assets
+14:36:16 - INFO     - Assets written to: /tmp/tmp8j3vljdz/assets
+14:39:59 - WARNING  - 5 out of the last 5 calls to <function TensorFlowTrainer.make_predict_function.<locals>.one_step_on_data_distributed at 0x7ffe504c8680> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+14:40:08 - WARNING  - 6 out of the last 6 calls to <function TensorFlowTrainer.make_predict_function.<locals>.one_step_on_data_distributed at 0x7ffe68433740> triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to https://www.tensorflow.org/guide/function#controlling_retracing and https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+14:43:00 - INFO     - Function `function` contains input name(s) resource with unsupported characters which will be renamed to sequential_30_1_dense_79_1_add_readvariableop_resource in the SavedModel.
+14:43:00 - INFO     - Function `function` contains input name(s) resource with unsupported characters which will be renamed to sequential_30_1_dense_79_1_add_readvariableop_resource in the SavedModel.
+14:43:00 - INFO     - Assets written to: /tmp/tmpra3zbp9b/assets
+14:43:34 - INFO     - Assets written to: /tmp/tmpsti5e84a/assets
+14:45:41 - INFO     - Assets written to: /tmp/tmpyc03j55_/assets
+14:49:11 - INFO     - Assets written to: /tmp/tmpen3qtbqe/assets
+14:52:40 - INFO     - Assets written to: /tmp/tmpyc53lt40/assets
+14:53:56 - INFO     - Assets written to: /tmp/tmpjqai49p6/assets
+14:55:45 - INFO     - Assets written to: /tmp/tmpo8gaah_v/assets
+14:57:49 - INFO     - Assets written to: /tmp/tmpyul02c_y/assets
+15:00:31 - INFO     - Assets written to: /tmp/tmp908n_wp8/assets
+15:02:26 - INFO     - Assets written to: /tmp/tmpuvovof7v/assets
+15:04:25 - INFO     - Assets written to: /tmp/tmpny_b5po5/assets
+15:06:23 - INFO     - Assets written to: /tmp/tmp4f3przww/assets
+15:10:24 - INFO     - Assets written to: /tmp/tmptsf96yi8/assets
+15:13:04 - INFO     - Assets written to: /tmp/tmp88hzxbsy/assets
+15:14:36 - INFO     - Assets written to: /tmp/tmp5cux8gf0/assets
+15:16:09 - INFO     - Assets written to: /tmp/tmpykwofrb_/assets
+15:18:40 - INFO     - Assets written to: /tmp/tmpxpo00s0z/assets
+15:21:15 - INFO     - Assets written to: /tmp/tmpl6yngulo/assets
+15:24:00 - INFO     - Assets written to: /tmp/tmp3smzimpd/assets
+15:26:29 - INFO     - Assets written to: /tmp/tmp6o_gcsnc/assets
+15:29:11 - INFO     - Assets written to: /tmp/tmp3onh3qwg/assets
+15:30:56 - INFO     - Assets written to: /tmp/tmp1gr2r4am/assets
+15:33:00 - INFO     - Assets written to: /tmp/tmplbb834_o/assets
+21:20:13 - INFO     - 🔍 Discovery attempt 1/3
+21:20:14 - INFO     - ✅ Discovered server at http://192.168.178.41:5000 (via port 5001)
+21:20:14 - INFO     - 
+🔍 Checking server health...
+21:20:14 - INFO     - ✅ Server is healthy!
+21:20:14 - INFO     - Uploading neural network models to the server...
+21:20:14 - INFO     - Uploading model for choice 1...
+21:40:07 - INFO     - 🔍 Discovery attempt 1/3
+21:40:07 - INFO     - ✅ Discovered server at http://192.168.178.41:5000 (via port 5001)
+21:40:07 - INFO     - 
+🔍 Checking server health...
+21:40:07 - INFO     - ✅ Server is healthy!
+21:41:31 - INFO     - 🔍 Discovery attempt 1/3
+21:41:31 - INFO     - ✅ Discovered server at http://192.168.178.41:5000 (via port 5001)
+21:41:31 - INFO     - 
+🔍 Checking server health...
+21:41:31 - INFO     - ✅ Server is healthy!
+21:41:31 - INFO     - Set model type to temperature
+21:41:31 - INFO     - Uploading neural network models to the server...
+21:41:31 - INFO     - Uploading model for choice 1...
+21:41:31 - INFO     - Uploading model for choice 2...
+21:41:31 - INFO     - Uploading model for choice 3...
+21:41:31 - INFO     - Uploading model for choice 4...
+21:41:31 - INFO     - Uploading model for choice 5...
+21:41:31 - INFO     - Uploading model for choice 6...
+21:41:32 - INFO     - Uploading model for choice 7...
+21:41:32 - INFO     - Uploading model for choice 8...
+21:41:32 - INFO     - Uploading model for choice 9...
+21:41:32 - INFO     - Uploading model for choice 10...
+21:41:32 - INFO     - Uploading model for choice 11...
+21:41:32 - INFO     - Uploading model for choice 12...
+21:41:32 - INFO     - Uploading model for choice 13...
+21:41:32 - INFO     - Uploading model for choice 14...
+21:41:33 - INFO     - Uploading model for choice 15...
+21:41:33 - INFO     - Uploading model for choice 16...
+21:41:33 - INFO     - Uploading model for choice 17...
+21:41:33 - INFO     - Uploading model for choice 18...
+21:41:33 - INFO     - Uploading model for choice 19...
+21:41:33 - INFO     - Uploading model for choice 20...
+21:41:33 - INFO     - Uploading model for choice 21...
+21:41:33 - INFO     - Uploading model for choice 22...
+21:41:33 - INFO     - Uploading model for choice 23...
+21:41:34 - INFO     - ✅ PASSED
+21:41:34 - INFO     - Generating code for the uploaded model...
+21:41:34 - INFO     - Generating code for model choice 1...

@@ -8,7 +8,8 @@ def main():
     print("Starting STM-Cast")
     the_builder = PipelineBuilder()
 
-    # Automatic pipelines for the continuse forecast
+    # Automatic pipelines for the continuse forecasting system
+
     """
     fir = the_builder.linear_model_pipeline(controller())
     fir.run()
@@ -36,8 +37,7 @@ def main():
         
     """
     
-    simulation = the_builder.simulation_pipeline(controller(),data_type="temperature")
-    simulation.run()
+    
 
      # === MULTI-MODEL TRAINING ===
     # Option 1: Einzelnes Modell
@@ -54,7 +54,8 @@ def main():
 
     # === CONTINUES RUN  === 
 
-    
+    cli = the_builder.client_pipeline(controller())
+    cli.run()
     
     
 

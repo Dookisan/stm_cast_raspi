@@ -73,6 +73,7 @@ def NeuralNetworkPage():
             ctrl.analyze_model_results(top_n=5)
             training_log.value = training_log.value + ["✅ Analysis complete"]
 
+            ctrl.save_NN_model(model_suffix=single_value.value)
             training_complete.value = True
             print("✅ Neural Network training complete")
         except Exception as e:

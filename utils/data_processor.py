@@ -30,6 +30,7 @@ class DataProcessor(object):
     self.ex = None
     self.predictions = None
     self.databyte = None
+    self.data_type = None 
 
   def _load_data(self):
     '''
@@ -99,6 +100,7 @@ class DataProcessor(object):
 
     subsets = pd.DataFrame(result.values,index = easy_access,columns = head)
     self.processed_data = subsets
+    self.data_type = data_type
     print(f"✅ Data successfully preprocessed.")
 
   def error_sequence_day(self,day):

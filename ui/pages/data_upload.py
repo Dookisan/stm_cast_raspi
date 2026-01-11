@@ -61,7 +61,7 @@ def load_sample_paths():
     print("📋 Sample paths loaded!")
 
 
-def preprocess_data():
+def preprocess_data(data_type: str):
     """Run preprocessing on loaded data"""
     ctrl = app_controller.value
 
@@ -71,7 +71,7 @@ def preprocess_data():
 
     try:
         print("🔄 Starting preprocessing...")
-        ctrl.preprocess_data()
+        ctrl.preprocess_data(data_type)
         data_preprocessed.set(True)
         print("✅ Preprocessing completed!")
     except Exception as e:
@@ -209,20 +209,20 @@ def DataUploadPage():
                     solara.Markdown("### Selection Weather component to preprocess")
 
                     solara.Button(
-                        "Temperature",
-                        color="primary" if mode.value == "Temperature" else "default",
-                        on_click=lambda: mode.set("Temperature")
+                        "temperature",
+                        color="primary" if mode.value == "temperature" else "default",
+                        on_click=lambda: mode.set("temperature")
                     )
                     solara.Button(
-                        "Humidity",
-                        color="primary" if mode.value == "Humidity" else "default",
-                        on_click=lambda: mode.set("Humidity")
+                        "humidity",
+                        color="primary" if mode.value == "humidity" else "default",
+                        on_click=lambda: mode.set("humidity")
                     )
 
                 # Preprocessing button
                 solara.Button(
                     "⚡ Run Preprocessing",
-                    on_click=lambda: preprocess_data(), # mode.value
+                    on_click=lambda: preprocess_data(mode.value), # mode.value
                     color="warning",
                     block=True,
                     style="margin-bottom: 1rem;"
