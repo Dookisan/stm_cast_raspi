@@ -82,6 +82,12 @@ def preprocess_data():
 @solara.component
 def DataUploadPage():
     """Data upload and preprocessing"""
+    
+    # Hooks müssen ZUERST kommen (vor allen if-Statements)
+    mode = solara.use_reactive("Temperature")
+    single_value = solara.use_reactive(1)
+    range_value = solara.use_reactive([1, 5])
+    
     solara.Markdown("## 📁 Data Upload & Preprocessing")
 
     # SAMPLE DATA QUICK LOAD
@@ -199,10 +205,24 @@ def DataUploadPage():
                 df_api = ctrl.data_processor.weather_api
                 df_stm = ctrl.data_processor.weather_stm
 
+                with solara.Row():
+                    solara.Markdown("### Selection Weather component to preprocess")
+
+                    solara.Button(
+                        "Temperature",
+                        color="primary" if mode.value == "Temperature" else "default",
+                        on_click=lambda: mode.set("Temperature")
+                    )
+                    solara.Button(
+                        "Humidity",
+                        color="primary" if mode.value == "Humidity" else "default",
+                        on_click=lambda: mode.set("Humidity")
+                    )
+
                 # Preprocessing button
                 solara.Button(
                     "⚡ Run Preprocessing",
-                    on_click=lambda: preprocess_data(),
+                    on_click=lambda: preprocess_data(), # mode.value
                     color="warning",
                     block=True,
                     style="margin-bottom: 1rem;"

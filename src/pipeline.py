@@ -92,7 +92,7 @@ class PipelineBuilder(object):
         return pipeline
 
     @staticmethod
-    def simulation_pipeline(controller):
+    def simulation_pipeline(controller, data_type:str):
         """simulates the error sequence for day 18 and writes it to i2c"""
         
         pipeline = Pipeline("simulation", controller)
@@ -100,8 +100,21 @@ class PipelineBuilder(object):
         .add_step("init_data_processor", filepath_station="data/Weatherstation_STMCAST_Data_202511102036.csv",
                         filepath_weather="data/Weather_API_Data_202511102036.csv")
         .add_step("load_data")
-        .add_step("preprocess_data")
+        .add_step("preprocess_data", data_type=data_type)
         .add_step("example_db_series")
         .add_step("simulate_i2c_write_array")
         )
+        return pipeline
+
+    @staticmethod
+    def client_pipeline(controller):
+        """Tests the automatic updater client side"""
+
+        pipeline = Pipeline("updater", controller)
+        (pipeline.add_step("init_client")
+        .add_step("upload_nn_models", range(1,24,1))
+        .add_step("generate_code", target="STM32", name="weather_forecast")
+        )
+
+        
         return pipeline

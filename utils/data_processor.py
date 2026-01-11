@@ -59,7 +59,7 @@ class DataProcessor(object):
       weather_stm = stm[vals].apply(pd.to_numeric, errors='coerce').assign(observation_time=pd.to_datetime(stm['observation_time']))
       self.weather_stm = weather_stm
 
-  def preprocess_data(self):
+  def preprocess_data(self,data_type:str):
 
     '''
     Preprocess Data in one Database
@@ -90,7 +90,7 @@ class DataProcessor(object):
     )
 
     result = result.dropna().reset_index(drop=True)
-    error = result['temperature_stm'] - result['temperature_api']
+    error = result[f'{data_type}_stm'] - result[f'{data_type}_api']
     result = result.assign(error=error)
     result = result.set_index('observation_time')
     head = result.columns.values
