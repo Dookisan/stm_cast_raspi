@@ -11,7 +11,8 @@ from ..config.state import (
     data_loaded,
     data_preprocessed,
     show_api_preview,
-    show_stm_preview
+    show_stm_preview,
+    weather_component_type
 )
 
 def load_data_from_paths():
@@ -84,7 +85,6 @@ def DataUploadPage():
     """Data upload and preprocessing"""
     
     # Hooks müssen ZUERST kommen (vor allen if-Statements)
-    mode = solara.use_reactive("Temperature")
     single_value = solara.use_reactive(1)
     range_value = solara.use_reactive([1, 5])
     
@@ -210,19 +210,19 @@ def DataUploadPage():
 
                     solara.Button(
                         "temperature",
-                        color="primary" if mode.value == "temperature" else "default",
-                        on_click=lambda: mode.set("temperature")
+                        color="primary" if weather_component_type.value == "temperature" else "default",
+                        on_click=lambda: weather_component_type.set("temperature")
                     )
                     solara.Button(
                         "humidity",
-                        color="primary" if mode.value == "humidity" else "default",
-                        on_click=lambda: mode.set("humidity")
+                        color="primary" if weather_component_type.value == "humidity" else "default",
+                        on_click=lambda: weather_component_type.set("humidity")
                     )
 
                 # Preprocessing button
                 solara.Button(
                     "⚡ Run Preprocessing",
-                    on_click=lambda: preprocess_data(mode.value), # mode.value
+                    on_click=lambda: preprocess_data(weather_component_type.value),
                     color="warning",
                     block=True,
                     style="margin-bottom: 1rem;"

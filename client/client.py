@@ -23,7 +23,7 @@ class Client(object):
     def __init__(self):
         self.Server_URL = discover_server()
         heartbeat(self.Server_URL)
-        self.requests = Requests(self.Server_URL)
+        self.requests = Requests(self.Server_URL) 
 
         self.reques_mongoose = "http://10.0.0.42/json_data" 
         self.mongoose_data = None
@@ -41,7 +41,18 @@ class Client(object):
         df = pd.read_json(response.text, lines=True)
         self.mongoose_data = df
 
+    def update_database(self):
+        """Updates the database with the latest data from the mongoose webserver"""
+        database_data =  requests.get(self.reques_mongoose, timeout=5)
 
+        if database_data.status_code == 200:
+            data = database_data.json()
+            logger.debug(f"Database data: {data}")
+        else:
+            logger.error("Error:", database_data.status_code)
+
+        return data
+    
 # testfunction for development
 def main():
     CLIENT = Client()

@@ -13,6 +13,8 @@ def discover_server(timeout=DISCOVERY_TIMEOUT,retries=DISCOVERY_RETRIES):
 
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+    sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) 
+    sock.bind(('', 0))  
     sock.settimeout(timeout)
 
     request = {"action": "discover", "service": SERVICE_NAME}
@@ -25,10 +27,11 @@ def discover_server(timeout=DISCOVERY_TIMEOUT,retries=DISCOVERY_RETRIES):
         for port in discovery_ports:
             try:
                 logger.debug(f"   Broadcasting to port {port}...")
-                sock.sendto(
-                    json.dumps(request).encode(), ('<broadcast>', port)  
-                )
-                
+                sock.sendto(json.dumps(request).encode(), ('<broadcast>', port))
+                # Zusatz: gerichteter Broadcast auf dein Subnetz (falls globales Broadcast gefiltert wird)
+                try: sock.sendto(json.dumps(request).encode(), ('192.168.199.255', port))
+                except Exception: pass
+
                 # Wait for response with short timeout per port
                 try:
                     data, addr = sock.recvfrom(1024)
@@ -46,9 +49,12 @@ def discover_server(timeout=DISCOVERY_TIMEOUT,retries=DISCOVERY_RETRIES):
                     
             except Exception as e:
                 logger.debug(f"   Error on port {port}: {e}")
-                continue
+                return "http://10.0.0.1:5000"
+        try:
+            sock.sendto(json.dumps(request).encode(), ('192.168.196.119', 5001))
+        except Exception:
+            pass
         
-        # If no server found after trying all ports, wait before next retry
         if attempt < retries - 1:
             logger.warning(f"⚠️  No response on any port, retrying in 1 second...")
             time.sleep(1)

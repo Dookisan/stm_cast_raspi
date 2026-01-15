@@ -3,7 +3,7 @@ created_by: Elias Schebath
 """
 import solara
 import pandas as pd
-from ..config.state import app_controller, data_preprocessed
+from ..config.state import app_controller, data_preprocessed, weather_component_type
 
 
 @solara.component
@@ -84,16 +84,22 @@ def NeuralNetworkPage():
 
     def upload_neural_networks():
         ctrl.init_client()
+        
+        component = weather_component_type.value  # "temperature" or "humidity"
+        ctrl.set_client_type(type= component)  
+        
         if mode.value == "single":
                 input_layer_choice.value = single_value.value
+                
                 ctrl.upload_nn_models(input_layer_choice.value)
-                ctrl.generate_code(target="stm32f4", name="my_model")
-                print(f"✅ NN model uploaded and code generated for choice={input_layer_choice.value}")
+                ctrl.generate_code(target="stm32f4", name=f"{component}_model_{input_layer_choice.value}")
+                print(f"✅ {component} NN model uploaded and code generated for choice={input_layer_choice.value}")
 
         else:  # range  
+                
                 ctrl.upload_nn_models(range(range_value.value[0], range_value.value[1] + 1))
-                ctrl.generate_code(target="stm32f4", name="my_model")
-                print(f"✅ Multiple models uploaded and code generated for range {range_value.value[0]}-{range_value.value[1]}")
+                ctrl.generate_code(target="stm32f4", name=f"{component}_model_range")
+                print(f"✅ Multiple {component} models uploaded and code generated for range {range_value.value[0]}-{range_value.value[1]}")
 
     # Model Initialization
     with solara.Card("🔧 Model Initialization", elevation=2):

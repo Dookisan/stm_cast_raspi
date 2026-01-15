@@ -10,10 +10,9 @@ created_by: Elias Schebath
 '''
 class DataProcessor(object):
 
-  def __init__(self,filepath_stm = None,filepath_api = None):
+  def __init__(self,database,):
     # Initialize DataProcessor with file paths
-    self.filepath_stm = filepath_stm
-    self.filepath_api = filepath_api
+    self.database = database
 
     self.weather_stm = None
     self.weather_api = None
@@ -39,6 +38,7 @@ class DataProcessor(object):
     incorrect file format.
     Returns:
     '''
+    api = pd.read_sql("SELECT * FROM api_data", self.database)
     stm = pd.read_csv(self.filepath_stm, sep=';')
     vals = ['temperature','pressure','humidity']
     stm = stm.replace(',', '.', regex=True).set_index('ID')

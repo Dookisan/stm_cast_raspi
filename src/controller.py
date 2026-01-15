@@ -6,6 +6,7 @@ from src.linear_corrector import FIRMultiStepPredictor
 from utils.i2c import i2c_com
 from api.requests import client
 from client.client import Client
+from data.database import DATABASE
 
 
 '''
@@ -24,6 +25,7 @@ class controller(object):
         self.can_interrupt = False
         self.mongoose_data = None
         self.simulation = False
+        self.database_instance = None
 
     def current_status(self):
         '''
@@ -72,8 +74,8 @@ class controller(object):
                 print("="*60)
 
     #---------Data Processor Methods---------#
-    def init_data_processor(self, filepath_station = None, filepath_weather = None):
-        self.data_processor = DataProcessor(filepath_station, filepath_weather)
+    def init_data_processor(self):
+        self.data_processor = DataProcessor(self.database_instance)
 
     def load_stm_data(self):
         if not self.data_processor:
@@ -346,6 +348,9 @@ class controller(object):
     def init_client(self):                 #TODO: Lool at the mongoose pipeline
         self.client_api = Client()
         print("✅ Client initialized.")
+        data = self.client_api.update_database()
+        database_instance = DATABASE(data)
+        self.database_instance = database_instance.db_connection
 
     def fetch_mongoose_data(self):
         if not self.client_api:
@@ -378,6 +383,10 @@ class controller(object):
             raise Exception("Client not initialized. Call init_client first.")
         self.client_api.requests.set_type(type)
         print(f"✅ Client model type set to '{type}'.")
+
+        
+
+        
     '''
     how i activatet them prevoisly
 

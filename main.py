@@ -25,7 +25,9 @@ def main():
 
     cli = the_builder.client_pipeline(controller())
     cli.run()
-    
+
+    mongoose = mongoose_pipeline(controller()):
+    mongoose.run()
     print("\n🎯 Fertig! Alle Modelle sind im 'models/' Ordner gespeichert.")
 
 
@@ -53,10 +55,8 @@ def main():
    # results = CONTROLLER.train_multiple_models(slice(1, 22, 1))  # [6, 12, 18, 24]
 
     # === CONTINUES RUN  === 
-
-    cli = the_builder.client_pipeline(controller())
-    cli.run()
-    
+    simulation = the_builder.simulation_pipeline(controller())
+    simulation.run()
     
 
 if __name__ == "__main__":

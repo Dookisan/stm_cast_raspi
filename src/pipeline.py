@@ -31,8 +31,11 @@ class PipelineBuilder(object):
     def multi_mododel_training_pipeline(controller):
         """creates all nn for a 24h forecast"""
         pipeline = Pipeline("multi_model_training", controller)
-        (pipeline.add_step("init_data_processor", filepath_station="data/Weatherstation_STMCAST_Data_202511102036.csv",
-                        filepath_weather="data/Weather_API_Data_202511102036.csv")
+
+        (
+        pipeline
+        .add_step("init_client")
+        .add_step("init_data_processor")
         .add_step("load_data")
         .add_step("preprocess_data")
         .add_step("init_neuronal_network")
@@ -45,8 +48,10 @@ class PipelineBuilder(object):
         """trains a single nn model for given choice"""
         pipeline = Pipeline("model_training",controller)
 
-        (pipeline.add_step("init_data_processor", filepath_station="data/Weatherstation_STMCAST_Data_202511102036.csv",
-                        filepath_weather="data/Weather_API_Data_202511102036.csv")
+        (
+        pipeline
+        .add_step("init_client")
+        .add_step("init_data_processor")
         .add_step("load_data")
         .add_step("preprocess_data")
         .add_step("init_neuronal_network")
@@ -63,8 +68,10 @@ class PipelineBuilder(object):
         """traines the linear model for 24h forecast"""
         pipeline = Pipeline("fir_forecast", controller)
 
-        (pipeline.add_step("init_data_processor", filepath_station="data/Weatherstation_STMCAST_Data_202511102036.csv",
-                        filepath_weather="data/Weather_API_Data_202511102036.csv")
+        (
+        pipeline
+        .add_step("init_client")
+        .add_step("init_data_processor")
         .add_step("load_data")
         .add_step("preprocess_data")
         .add_step("init_linear_model",9)
@@ -80,10 +87,11 @@ class PipelineBuilder(object):
 
         pipeline = Pipeline("mongoose_i2c", controller)
 
-        (pipeline.add_step("init_data_processor", filepath_station="data/Weatherstation_STMCAST_Data_202511102036.csv",
-                        filepath_weather="data/Weather_API_Data_202511102036.csv")
-         .add_step("init_i2c")
+        (
+        pipeline
         .add_step("init_client")
+        .add_step("init_data_processor")
+        .add_step("init_i2c")
         .add_step("check_can_interrupt")
         .add_step("fetch_mongoose_data")
         .add_step("preprocess_mongoose_data")
@@ -96,9 +104,11 @@ class PipelineBuilder(object):
         """simulates the error sequence for day 18 and writes it to i2c"""
         
         pipeline = Pipeline("simulation", controller)
-        (pipeline.add_step("init_i2c")
-        .add_step("init_data_processor", filepath_station="data/Weatherstation_STMCAST_Data_202511102036.csv",
-                        filepath_weather="data/Weather_API_Data_202511102036.csv")
+        (
+        pipeline
+        .add_step("init_client")
+        .add_step("init_i2c")
+        .add_step("init_data_processor")
         .add_step("load_data")
         .add_step("preprocess_data", data_type=data_type)
         .add_step("example_db_series")
@@ -111,9 +121,12 @@ class PipelineBuilder(object):
         """Tests the automatic updater client side"""
 
         pipeline = Pipeline("updater", controller)
-        (pipeline.add_step("init_client")
+        (
+        pipeline
+        .add_step("init_client")
         .add_step("set_client_type", type="temperature")    
         .add_step("upload_nn_models", range(1,24,1))
+        .add_step("set_client_type", type="humidity")
         .add_step("generate_code", target="STM32", name="temperature")
         )
 

@@ -37,5 +37,8 @@ available_files_list = solara.reactive([])
 show_api_preview = solara.reactive(False)  # Show/hide Weather API DataFrame
 show_stm_preview = solara.reactive(False)  # Show/hide Weather Station DataFrame
 
+# Weather component type selection (temperature or humidity)
+weather_component_type = solara.reactive("temperature")  # "temperature" or "humidity"
+
 # Sidebar state
 sidebar_collapsed = solara.reactive(False)
