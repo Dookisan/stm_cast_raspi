@@ -39,24 +39,16 @@ def main():
         
     """
     
-    
-
-     # === MULTI-MODEL TRAINING ===
-    # Option 1: Einzelnes Modell
     # CONTROLLER.train_multiple_models(6)
-    
-    # Option 2: Liste von Choices
     #CONTROLLER.train_multiple_models([6, 12, 18])
-    
-    # Option 3: Range
     # CONTROLLER.train_multiple_models(range(6, 25, 6))  # [6, 12, 18, 24]
-    
-    # Option 4: Slice 
-   # results = CONTROLLER.train_multiple_models(slice(1, 22, 1))  # [6, 12, 18, 24]
+    # results = CONTROLLER.train_multiple_models(slice(1, 22, 1))  # [6, 12, 18, 24]
 
-    # === CONTINUES RUN  === 
-    simulation = the_builder.simulation_pipeline(controller())
-    simulation.run()
+    while True:
+     # === MONGOOSE COMMUNICATION PIPELINE ===      
+        server = the_builder.mongoose_pipeline(controller())
+        server.run()
+
     
 
 if __name__ == "__main__":

@@ -47,15 +47,12 @@ def load_data_from_paths():
 def load_sample_paths():
     """Load sample file paths for testing - doesn't fill input fields"""
     # Define paths without setting the input fields
-    api_path = "data/Weather_API_Data_202511102036.csv"
-    station_path = "data/Weatherstation_STMCAST_Data_202511102036.csv"
 
     # activate back end directly with paths
     ctrl = app_controller.value
-    ctrl.init_data_processor(
-        filepath_station=station_path,
-        filepath_weather=api_path
-    )
+
+    ctrl.init_client()
+    ctrl.init_data_processor()
     ctrl.load_data()
     data_loaded.set(True)
     data_preprocessed.set(False)  # Reset preprocessing state
@@ -92,13 +89,10 @@ def DataUploadPage():
 
     # SAMPLE DATA QUICK LOAD
     with solara.Card("🗄️ Database Sample Data", elevation=2, style="background: #e3f2fd"):
-        solara.Markdown("**Quick load sample data from database:**")
-        solara.Markdown(
-            "- `data/Weather_API_Data_202511102036.csv`\n"
-            "- `data/Weatherstation_STMCAST_Data_202511102036.csv`"
-        )
+        solara.Markdown("**Quick load data from database:**")
+
         solara.Button(
-            "📋 Load Sample Data",
+            "📋 Connect to Database",
             color="primary",
             block=True,
             on_click=lambda: load_sample_paths()

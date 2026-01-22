@@ -112,6 +112,7 @@ class PipelineBuilder(object):
         .add_step("load_data")
         .add_step("preprocess_data", data_type=data_type)
         .add_step("example_db_series")
+        .add_step("get_predictions")
         .add_step("simulate_i2c_write_array")
         )
         return pipeline
@@ -124,6 +125,7 @@ class PipelineBuilder(object):
         (
         pipeline
         .add_step("init_client")
+        .add_step("remote_updater")
         .add_step("set_client_type", type="temperature")    
         .add_step("upload_nn_models", range(1,24,1))
         .add_step("set_client_type", type="humidity")

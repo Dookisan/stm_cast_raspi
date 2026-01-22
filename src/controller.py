@@ -1,4 +1,6 @@
 
+from time import sleep
+import time
 from utils.data_processor import DataProcessor
 from utils.plotter import Plotter
 from src.deep_learning import NeuronalNetworkModel
@@ -118,7 +120,11 @@ class controller(object):
         self.simulation = True
         self.mongoose_data = self.data_processor.ex
 
-
+    def get_predictions(self):
+        if not self.data_processor:
+            raise Exception("DataProcessor not initialized. Call init_data_processor first.")
+        predictions = self.data_processor.get_webserver_predictions()
+        return predictions
     #---------Plotter Methods---------#
 
     def init_plotter(self):
@@ -292,9 +298,8 @@ class controller(object):
         while(1):
 
             try:
-                print(f"ich bin da")
                 incoming = self.i2c_com.readArray()
-
+                time.sleep(0.3)
                 if 2 in  incoming:
                     print("⚠️ CAN Interrupt detected from STM32.")
                     self.can_interrupt = True
@@ -334,23 +339,20 @@ class controller(object):
         incoming = self.i2c_com.write_byte_data(self.mongoose_data.astype(int))
         #incoming = self.i2c_com.generateTelematry(self.data_processor.ex["weatherstation_temp"][0].astype(int))
         print(f"data i2c byte: {incoming}")
-    """
-    def write_i2c_array(self):
-        if not self.i2c_com:
-            raise Exception("I2C communication not initialized. Call init_i2c first.")
-        elif not self.fir_filter.is_trained:
-            raise Exception("FIR Model not trained. Call predict_linear_sequence first.")
-        self.data_processor.resize_to_can_frame(self.data_processor.prediction)
-        self.i2c_com.writeArray(self.data_processor.databyte)
-        print("✅ Data array written to I2C device.")
-      """
+    
     #---------Client Methods---------#
     def init_client(self):                 #TODO: Lool at the mongoose pipeline
         self.client_api = Client()
-        print("✅ Client initialized.")
         data = self.client_api.update_database()
-        database_instance = DATABASE(data)
+        database_instance = DATABASE()
+        print("✅ Database connection initialized.")
         self.database_instance = database_instance.db_connection
+
+        # Update all Databases
+        database_instance.write_to_training_db(self.client_api.data_training)
+        database_instance.write_to_prediction_temp_db(self.client_api.data_pred_temp)
+        database_instance.write_to_prediction_hum_db(self.client_api.data_pred_hum)
+
 
     def fetch_mongoose_data(self):
         if not self.client_api:
@@ -383,6 +385,12 @@ class controller(object):
             raise Exception("Client not initialized. Call init_client first.")
         self.client_api.requests.set_type(type)
         print(f"✅ Client model type set to '{type}'.")
+
+    def remote_updater(self):
+        if not self.client_api:
+            raise Exception("Client not initialized. Call init_client first.")
+        self.client_api.init_remote_updater()
+        print("✅ Remote updater initialized.")
 
         
 

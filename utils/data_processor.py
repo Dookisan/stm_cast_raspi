@@ -10,7 +10,7 @@ created_by: Elias Schebath
 '''
 class DataProcessor(object):
 
-  def __init__(self,database,):
+  def __init__(self,database):
     # Initialize DataProcessor with file paths
     self.database = database
 
@@ -37,14 +37,16 @@ class DataProcessor(object):
     **Developer Note**: It has no current error handling for file not found nor
     incorrect file format.
     Returns:
+
     '''
-    api = pd.read_sql("SELECT * FROM api_data", self.database)
-    stm = pd.read_csv(self.filepath_stm, sep=';')
+    stm = pd.read_sql("SELECT * FROM weatherstation_data", self.database)
+    #stm = pd.read_csv(self.filepath_stm, sep=';')
     vals = ['temperature','pressure','humidity']
     stm = stm.replace(',', '.', regex=True).set_index('ID')
     weather_stm = stm[vals].apply(pd.to_numeric, errors='coerce').assign(observation_time=pd.to_datetime(stm['observation_time']))
 
-    api = pd.read_csv(self.filepath_api, sep=';').set_index('ID')
+    api = pd.read_sql("SELECT * FROM api_data", self.database)
+    #api = pd.read_csv(self.filepath_api, sep=';').set_index('ID')
     api = api.replace(',', '.', regex=True)
     weather_api = api[vals].apply(pd.to_numeric, errors='coerce').assign(observation_time=pd.to_datetime(api['observation_time']))
     print(f"✅ Data loaded successfully. Preprocessing can begin now.")
@@ -260,4 +262,9 @@ class DataProcessor(object):
       })
       value = mongoose.iloc[0].values
       return value
+
+  def get_webserver_predictions(self):
+      predictions = pd.read_sql("SELECT * FROM stmcast_predictions", self.database)
+      return predictions
+     
      

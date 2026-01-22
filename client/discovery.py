@@ -29,7 +29,7 @@ def discover_server(timeout=DISCOVERY_TIMEOUT,retries=DISCOVERY_RETRIES):
                 logger.debug(f"   Broadcasting to port {port}...")
                 sock.sendto(json.dumps(request).encode(), ('<broadcast>', port))
                 # Zusatz: gerichteter Broadcast auf dein Subnetz (falls globales Broadcast gefiltert wird)
-                try: sock.sendto(json.dumps(request).encode(), ('192.168.199.255', port))
+                try: sock.sendto(json.dumps(request).encode(), ('192.168.196.153', port))
                 except Exception: pass
 
                 # Wait for response with short timeout per port

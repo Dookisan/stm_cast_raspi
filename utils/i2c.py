@@ -26,7 +26,7 @@ class i2c_com(object):
         while(1):
             try:
                 incoming_data = self.i2c_bus.read_byte(self.i2c_addr)
-                print(f"Received data: {incoming_data} ")
+                #print(f"Received data: {incoming_data} ")
                 break
             except Exception as e:
                 time.sleep(0.01)
