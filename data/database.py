@@ -7,6 +7,7 @@ import pandas as pd
 from sqlalchemy import create_engine
 
 
+
 # -----------------------------
 # Einstellungen
 # -----------------------------
@@ -37,6 +38,7 @@ class DATABASE(object):
         datum = now.strftime("%Y/%m/%d")
         uhrzeit = now.strftime("%H:%M:")
         observation_time_WEATHERSTATION =  now.strftime("%Y/%m/%d %H:%M")
+                        
                             
         # 2. In MySQL einfügen
         mydb = mysql.connector.connect(
@@ -74,6 +76,12 @@ class DATABASE(object):
         mydb.close()
 
     def write_to_prediction_temp_db(self,data):
+        
+        now = datetime.datetime.now()
+        datum = now.strftime("%Y/%m/%d")
+        uhrzeit = now.strftime("%H:%M:")
+        observation_time =  now.strftime("%Y/%m/%d %H:%M")
+
         mydb = mysql.connector.connect(
                     host="192.168.4.1",
                     user="Elias_",
@@ -82,8 +90,9 @@ class DATABASE(object):
                 )
         mycursor = mydb.cursor() # Objekt mit dem man SQL Befehle ausführen kann.
 
-        sql_predictions = ("INSERT INTO stmcast_predictions_temp (HOUR_0, HOUR_1, HOUR_2, HOUR_3, HOUR_4, HOUR_5, HOUR_6, HOUR_7, HOUR_8, HOUR_9, HOUR_10, HOUR_11, HOUR_12, HOUR_13, HOUR_14, HOUR_15, HOUR_16, HOUR_17, HOUR_18, HOUR_19, HOUR_20, HOUR_21, HOUR_22, HOUR_23) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)")
-        val_predictions = (
+
+        sql_predictions = ("INSERT INTO stmcast_predictions_temp (HOUR_0, HOUR_1, HOUR_2, HOUR_3, HOUR_4, HOUR_5, HOUR_6, HOUR_7, HOUR_8, HOUR_9, HOUR_10, HOUR_11, HOUR_12, HOUR_13, HOUR_14, HOUR_15, HOUR_16, HOUR_17, HOUR_18, HOUR_19, HOUR_20, HOUR_21, HOUR_22, HOUR_23,timestamp) VALUES (%s,%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)")
+        val_predictions = (  
                             data["00:00"],
                             data["01:00"],
                             data["02:00"],
@@ -107,7 +116,8 @@ class DATABASE(object):
                             data["20:00"],
                             data["21:00"],
                             data["22:00"],
-                            data["23:00"]
+                            data["23:00"],
+                            observation_time
                         )
         mycursor.execute(sql_predictions, val_predictions)#
 
@@ -118,6 +128,12 @@ class DATABASE(object):
         mydb.close()
 
     def write_to_prediction_hum_db(self,data):
+        
+        now = datetime.datetime.now()
+        datum = now.strftime("%Y/%m/%d")
+        uhrzeit = now.strftime("%H:%M:")
+        observation_time =  now.strftime("%Y/%m/%d %H:%M")
+
         mydb = mysql.connector.connect(
                     host="192.168.4.1",
                     user="Elias_",
@@ -126,7 +142,7 @@ class DATABASE(object):
                 )
         mycursor = mydb.cursor() # Objekt mit dem man SQL Befehle ausführen kann.
 
-        sql_predictions = ("INSERT INTO stmcast_predictions_hum (HOUR_0, HOUR_1, HOUR_2, HOUR_3, HOUR_4, HOUR_5, HOUR_6, HOUR_7, HOUR_8, HOUR_9, HOUR_10, HOUR_11, HOUR_12, HOUR_13, HOUR_14, HOUR_15, HOUR_16, HOUR_17, HOUR_18, HOUR_19, HOUR_20, HOUR_21, HOUR_22, HOUR_23) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)")
+        sql_predictions = ("INSERT INTO stmcast_predictions_hum (HOUR_0, HOUR_1, HOUR_2, HOUR_3, HOUR_4, HOUR_5, HOUR_6, HOUR_7, HOUR_8, HOUR_9, HOUR_10, HOUR_11, HOUR_12, HOUR_13, HOUR_14, HOUR_15, HOUR_16, HOUR_17, HOUR_18, HOUR_19, HOUR_20, HOUR_21, HOUR_22, HOUR_23, timestamp) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)")
         val_predictions = (
                             data["00:00"],
                             data["01:00"],
@@ -151,7 +167,8 @@ class DATABASE(object):
                             data["20:00"],
                             data["21:00"],
                             data["22:00"],
-                            data["23:00"]
+                            data["23:00"],
+                            observation_time
                         )
         mycursor.execute(sql_predictions, val_predictions)#
 

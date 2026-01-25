@@ -48,7 +48,8 @@ class DataProcessor(object):
     api = pd.read_sql("SELECT * FROM api_data", self.database)
     #api = pd.read_csv(self.filepath_api, sep=';').set_index('ID')
     api = api.replace(',', '.', regex=True)
-    weather_api = api[vals].apply(pd.to_numeric, errors='coerce').assign(observation_time=pd.to_datetime(api['observation_time']))
+  
+    weather_api = api[vals].apply(pd.to_numeric, errors='coerce').assign(observation_time=pd.to_datetime(api['observation_time'],errors='coerce'))
     print(f"✅ Data loaded successfully. Preprocessing can begin now.")
 
     self.weather_stm = weather_stm
@@ -263,8 +264,18 @@ class DataProcessor(object):
       value = mongoose.iloc[0].values
       return value
 
-  def get_webserver_predictions(self):
-      predictions = pd.read_sql("SELECT * FROM stmcast_predictions", self.database)
+  def db_predictions_temp(self):
+      predictions = pd.read_sql("SELECT * FROM stmcast_predictions_temp", self.database)
       return predictions
-     
-     
+
+  def db_predictions_hum(self):
+      predictions = pd.read_sql("SELECT * FROM stmcast_predictions_hum", self.database)
+      return predictions
+  
+  def db_temp_errors_stm(self):
+      errors = pd.read_sql("SELECT * FROM weatherstation_data", self.database)
+      return errors
+  
+  def db_temp_errors_api(self):
+      errors = pd.read_sql("SELECT * FROM api_data", self.database)
+      return errors

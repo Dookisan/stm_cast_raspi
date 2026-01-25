@@ -9,9 +9,119 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 import numpy as np
+import plotly.express as px
 
 # nur für daweil bevor den fix
 from src.linear_corrector import FIRMultiStepPredictor
+
+class animate(object):
+  def __init__(self,time,data_type,errors,errors_stm,temp_predictions,hum_predictions):
+    self.time = time
+    self.errors = errors
+    self.errors_stm = errors_stm
+    self.temp_predictions=temp_predictions
+    self.hum_predictions = hum_predictions
+    self.data_type = data_type
+    self.database = None
+    self.api = None
+    
+    
+    self.format_datetime()
+    self.get_selected_data()
+    self.preprocess_selected()
+    self._animation_base_frame()
+    self._fill_in_api_stm()
+    self.run()
+
+  def read_db(self):
+      self.errors = pd.read_excel('/content/drive/MyDrive/Bachelorarbeit/DB/errors.xlsx')
+      self.errors_stm = pd.read_excel('/content/drive/MyDrive/Bachelorarbeit/DB/errors_stm.xlsx')
+      self.temp_predictions = pd.read_excel('/content/drive/MyDrive/Bachelorarbeit/DB/temp_predictions.xlsx')
+      self.hum_predictions = pd.read_excel('/content/drive/MyDrive/Bachelorarbeit/DB/hum_predictions.xlsx')
+
+  def format_datetime(self):
+    self.errors = self.errors.assign(observation_time=pd.to_datetime(self.errors['observation_time'],errors='coerce'))
+    self.errors_stm = self.errors_stm.assign(observation_time=pd.to_datetime(self.errors_stm['observation_time'],errors='coerce'))
+
+  def get_selected_data(self):
+    self.errors = self.errors[self.errors['observation_time'] > self.time].head(24)
+    self.errors_stm = self.errors_stm[self.errors_stm['observation_time']>self.time].head(24)
+
+  def preprocess_selected(self):
+    self.errors.drop_duplicates(subset=['observation_time'], keep='first', inplace=True)
+    self.errors_stm.drop_duplicates(subset=['observation_time'], keep='first', inplace=True)
+
+    self.database = pd.merge_asof(
+        self.errors_stm,
+        self.errors,
+        on='observation_time',
+        direction='nearest',
+        suffixes=('_stm', '_api')
+    )
+    print(f"nach dem merge \n{self.database}")
+
+  def _animation_base_frame(self):
+    self.temp_predictions = self.temp_predictions.drop("Timestamp",axis=1)
+    df_temp = self.temp_predictions.T
+    df_temp.reset_index(inplace=True)
+    df_temp = df_temp.drop(df_temp.index[0])
+
+    df_temp_melted = df_temp.melt(id_vars=['index'], var_name='hour_string', value_name='temperature')
+    #print(df_temp_melted)
+    df_temp_melted['hour'] = df_temp_melted['index'].apply(lambda x: int(x.split('_')[1]))
+
+    self.animate_temp = df_temp_melted
+
+    self.hum_predictions = self.hum_predictions.drop("Timestamp",axis=1)
+    df_hum = self.hum_predictions.T
+    df_hum.reset_index(inplace=True)
+    df_hum = df_hum.drop(df_hum.index[0])
+
+    df_hum_melted = df_hum.melt(id_vars=['index'], var_name='hour_string', value_name='humidity')
+    df_hum_melted['hour'] = df_hum_melted['index'].apply(lambda x: int(x.split('_')[1]))
+    #print(df_hum_melted)
+
+  def _fill_in_api_stm(self):
+    nan_array = np.full(24, np.nan)
+    dummy_values = self.database[f'{self.data_type}_api'].reset_index(drop=True)
+
+    result_list = []
+
+    for i in range(len(dummy_values)):
+        nan_array[i] = dummy_values[i]
+        result_list.append(nan_array.copy())
+    api = np.concatenate(result_list)
+    self.api = api
+
+    dummy_values = self.database[f'{self.data_type}_stm'].reset_index(drop=True)
+    print(f"dummies: {dummy_values}")
+    nan_array = np.full(24, np.nan)
+    result_list = []
+
+    for i in range(len(dummy_values)):
+        nan_array[i] = dummy_values[i]
+        result_list.append(nan_array.copy())
+    stm = np.concatenate(result_list)
+    self.stm = stm
+
+  def run(self):
+    self.animate_temp['api']=pd.Series(self.api)
+    self.animate_temp['stm']=pd.Series(self.stm)
+
+    print(f"animate temp {self.animate_temp}")
+    fig = px.scatter(self.animate_temp,
+                 x='hour',
+                 y='temperature',
+                 animation_frame='hour_string',
+                 animation_group='hour',
+                 hover_name='hour_string',
+                 range_y=[-10, 40],
+                )
+    fig.add_scatter(x=self.animate_temp['hour'], y=self.animate_temp['api'], name='API', mode='lines')
+    fig.add_scatter(x=self.animate_temp['hour'], y=self.animate_temp['stm'], name='STM32', mode='lines')
+    fig.show()
+
+
 class Plotter(object):
   def __init__(self,data,fir_init:str):
     self.data = data

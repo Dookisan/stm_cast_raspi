@@ -3,6 +3,7 @@ from src.pipeline import Pipeline, PipelineBuilder
 from src.controller import controller
     
 
+import pandas as pd
 
 def main():
     print("Starting STM-Cast")
@@ -30,8 +31,19 @@ def main():
     mongoose.run()
     print("\n🎯 Fertig! Alle Modelle sind im 'models/' Ordner gespeichert.")
 
-
+    ctrl = controller()
+    ctrl.get_database_connection()
+    ctrl.init_data_processor()
+    df_temp = ctrl.get_temp_errors_api()
+    df_temp.to_csv("temp_errors.csv", index=False)
+    df_temp = df_temp.T
+    print(df_temp.head())
     
+    import pandas as pd 
+    
+    ctrl = controller()
+    ctrl.animate_data(pd.to_datetime('02.11.2025 01:00', dayfirst=True), "temperature")
+
     while True:
      # === MONGOOSE COMMUNICATION PIPELINE ===      
         server = the_builder.mongoose_pipeline(controller())
@@ -44,12 +56,6 @@ def main():
     # CONTROLLER.train_multiple_models(range(6, 25, 6))  # [6, 12, 18, 24]
     # results = CONTROLLER.train_multiple_models(slice(1, 22, 1))  # [6, 12, 18, 24]
 
-    while True:
-     # === MONGOOSE COMMUNICATION PIPELINE ===      
-        server = the_builder.mongoose_pipeline(controller())
-        server.run()
-
     
-
 if __name__ == "__main__":
     main()

@@ -230,8 +230,8 @@ class NeuronalNetworkModel(object):
         # Konvertiere zu TensorFlow Lite
         print(f"🔄 Konvertiere zu TensorFlow Lite...")
         converter = tf.lite.TFLiteConverter.from_keras_model(model)
-        # KEINE Quantisierung für bessere Genauigkeit
-        # converter.optimizations = [tf.lite.Optimize.DEFAULT]  # ❌ Auskommentiert!
+        # Quantisierung für bessere Genauigkeit und ram useage
+        converter.optimizations = [tf.lite.Optimize.DEFAULT]
         tflite_model = converter.convert()
 
         # Speichere TFLite Modell

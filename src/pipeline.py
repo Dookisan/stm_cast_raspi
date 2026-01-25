@@ -28,7 +28,7 @@ class Pipeline(object):
 class PipelineBuilder(object):
 
     @staticmethod
-    def multi_mododel_training_pipeline(controller):
+    def multi_mododel_training_pipeline(controller,data_type):
         """creates all nn for a 24h forecast"""
         pipeline = Pipeline("multi_model_training", controller)
 
@@ -37,7 +37,7 @@ class PipelineBuilder(object):
         .add_step("init_client")
         .add_step("init_data_processor")
         .add_step("load_data")
-        .add_step("preprocess_data")
+        .add_step("preprocess_data",data_type=data_type)
         .add_step("init_neuronal_network")
         .add_step("train_multiple_models", range(1, 25, 1))
         )
@@ -126,11 +126,10 @@ class PipelineBuilder(object):
         pipeline
         .add_step("init_client")
         .add_step("remote_updater")
-        .add_step("set_client_type", type="temperature")    
+        .add_step("set_client_type", type="humidity")    
         .add_step("upload_nn_models", range(1,24,1))
         .add_step("set_client_type", type="humidity")
-        .add_step("generate_code", target="STM32", name="temperature")
+        .add_step("generate_code", target="STM32", name="humidity")
         )
-
         
         return pipeline

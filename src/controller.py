@@ -2,7 +2,7 @@
 from time import sleep
 import time
 from utils.data_processor import DataProcessor
-from utils.plotter import Plotter
+from utils.plotter import Plotter,animate
 from src.deep_learning import NeuronalNetworkModel
 from src.linear_corrector import FIRMultiStepPredictor
 from utils.i2c import i2c_com
@@ -120,11 +120,27 @@ class controller(object):
         self.simulation = True
         self.mongoose_data = self.data_processor.ex
 
-    def get_predictions(self):
-        if not self.data_processor:
-            raise Exception("DataProcessor not initialized. Call init_data_processor first.")
-        predictions = self.data_processor.get_webserver_predictions()
+    def get_database_connection(self):
+        database_instance = DATABASE()
+        print("✅ Database connection initialized.")
+        self.database_instance = database_instance.db_connection
+        
+    def get_temp_predictions(self):
+        predictions = self.data_processor.db_predictions_temp()
         return predictions
+    
+    def get_hum_predictions(self):
+        predictions = self.data_processor.db_predictions_hum()
+        return predictions
+    
+    def get_temp_errors_stm(self):
+        errors = self.data_processor.db_temp_errors_stm()
+        return errors
+    
+    def get_temp_errors_api(self):
+        errors = self.data_processor.db_temp_errors_api()
+        return errors
+    
     #---------Plotter Methods---------#
 
     def init_plotter(self):
@@ -142,7 +158,17 @@ class controller(object):
             raise Exception("Plotter not initialized. Call init_plotter first.")
         self.data_plotter.error_plot()
 
-    #---------Neuronal Network Methods---------#
+    def animate_data(self, start_zeit, data_type):
+        self.get_database_connection()
+        self.init_data_processor()
+
+        temp_api = self.get_temp_errors_api()
+        temp_stm = self.get_temp_errors_stm()
+        pred_temp = self.get_hum_predictions()
+        pred_hum = self.get_temp_predictions()
+
+        animation = animate(start_zeit, data_type,temp_api,temp_stm,pred_temp,pred_hum)
+
     def init_neuronal_network(self):
         #TODO: Add init check for generate nn config
         self.neural_network_model = NeuronalNetworkModel()
